@@ -3,6 +3,7 @@ import argparse
 import re
 
 def check_blank_lines_between_blocks(file_path):
+    print(f"Checking file: {file_path}")  # Diagnóstico
     with open(file_path, 'r') as file:
         lines = file.readlines()
         for i in range(1, len(lines) - 1):
@@ -14,7 +15,7 @@ def check_blank_lines_between_blocks(file_path):
             elif (re.match(r'^\s*(class|def|if|for|while|with)', lines[i]) and 
                   not re.match(r'^\s*$', lines[i - 1]) and 
                   not re.match(r'^\s*$', lines[i - 2])):
-                print(f"{file_path}:{i+1}: Expected 2 blank lines before block definition")
+                print(f"{file_path}:{i+1}: Expected 1 blank lines before block definition")
 
 def lint_directory(directory):
     for root, _, files in os.walk(directory):

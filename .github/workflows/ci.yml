@@ -31,7 +31,7 @@ jobs:
       - name: Run custom linter
         run: |
           source venv/bin/activate
-          python custom_linter.py my_app tests --max-length 88
+          python custom_linter.py my_app tests
 
       - name: Run tests
         run: |

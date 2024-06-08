@@ -10,7 +10,7 @@ on:
       - main
 
 jobs:
-  lint:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,9 +26,14 @@ jobs:
         run: |
           python -m venv venv
           source venv/bin/activate
-          pip install ast radon
+          pip install -r requirements.txt
 
-      - name: Run custom linters
+      - name: Run custom linter
         run: |
           source venv/bin/activate
-          python custom_linter.py pipeline_prediction_model_v1-2.ipynb
+          python custom_linter.py my_app tests --max-line-length 88 --max-args 5
+
+      - name: Run tests
+        run: |
+          source venv/bin/activate
+          python -m unittest discover -s tests

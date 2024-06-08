@@ -1,5 +1,4 @@
 def process_numbers(a, b, c, d, e, f):
-    # Realiza varias operaciones con los números
     sum_all = a + b + c + d + e + f
     product_all = a * b * c * d * e * f
     average = sum_all / 6

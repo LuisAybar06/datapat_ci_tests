@@ -1,4 +1,5 @@
 import os
+import argparse
 
 def check_line_length(file_path, max_length):
     with open(file_path, 'r') as file:
@@ -21,12 +22,11 @@ def lint_directory(directory, max_length):
                 check_trailing_whitespace(file_path)
 
 if __name__ == "__main__":
-    import argparse
-
     parser = argparse.ArgumentParser(description="Custom Linter")
-    parser.add_argument("directory", help="Directory to lint")
+    parser.add_argument("directories", nargs='+', help="Directories to lint")
     parser.add_argument("--max-length", type=int, default=88, help="Max line length")
 
     args = parser.parse_args()
 
-    lint_directory(args.directory, args.max_length)
+    for directory in args.directories:
+        lint_directory(directory, args.max_length)

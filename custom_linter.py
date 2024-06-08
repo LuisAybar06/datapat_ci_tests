@@ -1,9 +1,10 @@
 import os
 import argparse
 import re
+import sys
 
 def check_blank_lines_between_blocks(file_path):
-    print(f"Checking file: {file_path}")  # Diagnóstico
+    errors = 0
     with open(file_path, 'r') as file:
         lines = file.readlines()
         for i in range(1, len(lines) - 1):
@@ -15,14 +16,18 @@ def check_blank_lines_between_blocks(file_path):
             elif (re.match(r'^\s*(class|def|if|for|while|with)', lines[i]) and 
                   not re.match(r'^\s*$', lines[i - 1]) and 
                   not re.match(r'^\s*$', lines[i - 2])):
-                print(f"{file_path}:{i+1}: Expected 1 blank lines before block definition")
+                print(f"{file_path}:{i+1}: Expected 2 blank lines before block definition")
+                errors += 1
+    return errors
 
 def lint_directory(directory):
+    total_errors = 0
     for root, _, files in os.walk(directory):
         for file in files:
             if file.endswith('.py'):
                 file_path = os.path.join(root, file)
-                check_blank_lines_between_blocks(file_path)
+                total_errors += check_blank_lines_between_blocks(file_path)
+    return total_errors
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Custom Linter")
@@ -30,5 +35,11 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
+    total_errors = 0
     for directory in args.directories:
-        lint_directory(directory)
+        total_errors += lint_directory(directory)
+    
+    if total_errors > 0:
+        sys.exit(1)
+    else:
+        sys.exit(0)

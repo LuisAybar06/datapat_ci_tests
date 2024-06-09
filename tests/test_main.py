@@ -29,22 +29,21 @@ class TestMyApp(unittest.TestCase):
         # Convertir el archivo .ipynb a .py
         self.py_file = convert_ipynb_to_py(get_ipynb_path())
 
-        # Importar las funciones del archivo .py generado
-        spec = importlib.util.spec_from_file_location("my_app", self.py_file)
-        self.my_app = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(self.my_app)
+        # Importar la función error_op del archivo .py generado
+        spec = importlib.util.spec_from_file_location("error_op", self.py_file)
+        my_module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(my_module)
+        
+        # Asignar la función error_op a un atributo de la clase de prueba
+        self.error_op = my_module.error_op
 
     def test_error_op(self):
-        result = self.my_app.error_op("Test Message")
+        result = self.error_op("Test Message")
         self.assertTrue(isinstance(result, Exception))
 
     def tearDown(self):
         # Eliminar el archivo .py generado
         os.remove(self.py_file)
-
-    # def test_validate_data(self):
-    #     result = self.my_app.validate_data("table_name")
-    #     self.assertTrue(isinstance(result, tuple))
 
 if __name__ == '__main__':
     unittest.main()

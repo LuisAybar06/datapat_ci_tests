@@ -3,3 +3,5 @@ mypy
 radon
 nbformat
 nbconvert
+
+pytest

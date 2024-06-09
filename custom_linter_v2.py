@@ -4,6 +4,7 @@ import re
 import sys
 
 def check_blank_lines_between_blocks(file_path):
+    print(f"Checking file: {file_path}")
     errors = 0
     with open(file_path, 'r') as file:
         lines = file.readlines()

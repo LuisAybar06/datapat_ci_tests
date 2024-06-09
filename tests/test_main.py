@@ -23,7 +23,7 @@ def get_ipynb_path():
 
 class TestMyApp(unittest.TestCase):
     def setUp(self):
-        # Convertir el archivo .ipynb a .py
+
         self.py_file = convert_ipynb_to_py(get_ipynb_path())
 
         # Importar la función error_op del archivo .py generado
@@ -33,7 +33,7 @@ class TestMyApp(unittest.TestCase):
         
         # Asignar la función error_op a un atributo de la clase de prueba
         self.error_op = my_module.error_op
-
+ 
     def test_error_op(self):
         result = self.error_op("Test Message")
         self.assertTrue(isinstance(result, Exception))

@@ -16,11 +16,8 @@ def convert_ipynb_to_py(ipynb_file):
     return py_file
 
 def get_ipynb_path():
-    # Ruta al directorio actual
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    # Ruta al directorio my_app
     my_app_dir = os.path.join(current_dir, '..', 'my_app')
-    # Ruta al archivo .ipynb dentro de my_app
     ipynb_file = os.path.join(my_app_dir, 'pipeline_prediction_model_v1-2.ipynb')
     return ipynb_file
 

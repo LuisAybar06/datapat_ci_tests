@@ -3,6 +3,8 @@ import nbformat
 from nbconvert import PythonExporter
 import importlib.util
 import unittest
+from google.auth import credentials
+from google.oauth2 import service_account
 
 # Función para convertir un archivo .ipynb a .py
 def convert_ipynb_to_py(ipynb_file):
@@ -43,4 +45,13 @@ class TestMyApp(unittest.TestCase):
         os.remove(self.py_file)
 
 if __name__ == '__main__':
+    # Definir la ruta al archivo JSON de la cuenta de servicio
+    service_account_file = 'groovy-form-424500-f2-6bcc2e282ee2.json'
+    
+    # Cargar las credenciales desde el archivo JSON de la cuenta de servicio
+    credentials = service_account.Credentials.from_service_account_file(service_account_file)
+
+    # Asignar las credenciales globales
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = service_account_file
+
     unittest.main()

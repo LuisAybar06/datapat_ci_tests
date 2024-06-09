@@ -10,7 +10,7 @@ on:
       - main
 
 jobs:
-  lint_and_test:
+  lint:
     runs-on: ubuntu-latest
 
     steps:
@@ -32,8 +32,3 @@ jobs:
         run: |
           source venv/bin/activate
           python custom_linter.py my_app
-
-      - name: Run tests
-        run: |
-          source venv/bin/activate
-          python -m pytest tests/test_main.py

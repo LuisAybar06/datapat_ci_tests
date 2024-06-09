@@ -34,13 +34,13 @@ class TestMyApp(unittest.TestCase):
         self.my_app = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(self.my_app)
 
-    def tearDown(self):
-        # Eliminar el archivo .py generado
-        os.remove(self.py_file)
-
     def test_error_op(self):
         result = self.my_app.error_op("Test Message")
         self.assertTrue(isinstance(result, Exception))
+
+    def tearDown(self):
+        # Eliminar el archivo .py generado
+        os.remove(self.py_file)
 
     # def test_validate_data(self):
     #     result = self.my_app.validate_data("table_name")

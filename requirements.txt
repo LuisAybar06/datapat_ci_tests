@@ -1,5 +1,7 @@
+#-----v2--------
 flake8
-# mypy
+mypy
+#---------------
 # radon
 # nbformat
 # nbconvert

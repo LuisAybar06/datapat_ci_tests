@@ -1,5 +1,6 @@
 from typing import List, Any
 
+
 def add(a, b):
     return a + b
 

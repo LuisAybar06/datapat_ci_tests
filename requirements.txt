@@ -1,13 +1,14 @@
-#-----v2--------
+#-----ci-v2--------
 flake8
 mypy
-#---------------
-# radon
-# nbformat
-# nbconvert
+#------------------
 
-# pytest
-
+#-----ci-v3--------
+radon
+nbformat
+nbconvert
+pytest
+#------------------
 
 # PyYAML
 # pytz

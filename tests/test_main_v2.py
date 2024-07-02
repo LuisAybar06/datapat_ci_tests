@@ -1,5 +1,5 @@
 import unittest
-from my_app.main import process_numbers
+from my_app.main_v2 import process_numbers
 
 class TestMain(unittest.TestCase):
     def test_process_numbers(self):

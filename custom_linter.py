@@ -14,7 +14,7 @@ def convert_notebook_to_script(notebook_path):
     return script
 
 
-def check_cyclomatic_complexity(file_content, file_path, max_complexity=10):
+def check_cyclomatic_complexity(file_content, file_path, max_complexity=1):
     print(f"Checking file: {file_path}")
     errors = 0
     tree = ast.parse(file_content)

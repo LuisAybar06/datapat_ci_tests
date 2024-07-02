@@ -27,7 +27,7 @@ jobs:
       - name: Run custom linter
         run: |
           source venv/bin/activate
-          python custom_linter_v1.py my_app/main_v1_2.py tests
+          python custom_linter_v1.py my_app tests
 
       - name: Run tests
         run: |

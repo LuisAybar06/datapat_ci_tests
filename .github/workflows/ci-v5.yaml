@@ -28,4 +28,4 @@ jobs:
       - name: Run custom linters
         run: |
           source venv/bin/activate
-          python custom_linter.py my_app
+          python custom_linter.py my_app --max-line-length 88

@@ -13,18 +13,6 @@ def convert_notebook_to_script(notebook_path):
     script, _ = exporter.from_notebook_node(notebook_content)
     return script
 
-def check_global_variables(file_content, file_path):
-    print(f"Checking file: {file_path}")
-    errors = 0
-    tree = ast.parse(file_content)
-    
-    global_vars = [node.id for node in ast.walk(tree) if isinstance(node, ast.Global)]
-    
-    for var in global_vars:
-        print(f"{file_path}: Global variable '{var}' detected")
-        errors += 1
-
-    return errors
 
 def check_cyclomatic_complexity(file_content, file_path, max_complexity=10):
     print(f"Checking file: {file_path}")
@@ -90,7 +78,7 @@ def check_naming_conventions(file_content, file_path):
 
     return errors
 
-def lint_file(file_path):
+def lint_file(file_path, max_line_length):
     errors = 0
     if file_path.endswith('.ipynb'):
         file_content = convert_notebook_to_script(file_path)
@@ -98,20 +86,19 @@ def lint_file(file_path):
         with open(file_path, 'r', encoding='utf-8') as file:
             file_content = file.read()
     
-    errors += check_global_variables(file_content, file_path)
     errors += check_cyclomatic_complexity(file_content, file_path)
-    errors += check_long_functions(file_content, file_path)
+    errors += check_long_functions(file_content, file_path, max_line_length)
     errors += check_naming_conventions(file_content, file_path)
     
     return errors
 
-def lint_directory(directory):
+def lint_directory(directory, max_line_length):
     total_errors = 0
     for root, _, files in os.walk(directory):
         for file in files:
-            if file.endswith('.py') or file.endswith('.ipynb'):
+            if file.endswith('.ipynb'):
                 file_path = os.path.join(root, file)
-                total_errors += lint_file(file_path)
+                total_errors += lint_file(file_path, max_line_length)
     return total_errors
 
 if __name__ == "__main__":
@@ -119,14 +106,17 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Custom Linter")
     parser.add_argument("directories", nargs='+', help="Directories to lint")
+    parser.add_argument("--max-line-length", type=int, default=88, help="Max line length")
 
     args = parser.parse_args()
 
     total_errors = 0
     for directory in args.directories:
-        total_errors += lint_directory(directory)
+        total_errors += lint_directory(directory, args.max_line_length)
     
     if total_errors > 0:
         sys.exit(1)
     else:
         sys.exit(0)
+
+

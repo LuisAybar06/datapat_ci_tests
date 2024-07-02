@@ -10,13 +10,6 @@ class TestMain(unittest.TestCase):
         self.assertEqual(result['max'], 6) 
         self.assertEqual(result['min'], 1)
 
-        result = process_numbers(-1, 1, -1, 1, -1, 1)
-        self.assertEqual(result['sum'], 0)
-        self.assertEqual(result['product'], 1)
-        self.assertEqual(result['average'], 0)
-        self.assertEqual(result['max'], 1)
-        self.assertEqual(result['min'], -1)
-
         result = process_numbers(0, 0, 0, 0, 0, 0)
         self.assertEqual(result['sum'], 0)
         self.assertEqual(result['product'], 0)

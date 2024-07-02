@@ -32,7 +32,7 @@ jobs:
       - name: Run type checking with mypy
         run: |
           source venv/bin/activate
-          mypy my_app/main_v1_2.py --config-file mypy.ini
+          mypy my_app --config-file mypy.ini
 
       - name: Run tests
         run: |

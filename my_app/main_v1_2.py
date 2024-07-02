@@ -1,22 +1,22 @@
+
 from typing import List, Any
 
+def process_data(data):
+    return data
 
-def add(a, b):
-    return a + b
+def concatenate_strings(strings: List[str]) -> str:
+    return ''.join(strings)
 
-
-def add_numbers(numbers: List[int]) -> int:
-    return sum(numbers)
-
-
-def print_message(message: str) -> None:
+def display_message(message: str):
     print(message)
 
 
-def process_data(data) -> Any:
-    return data
+def main():
+    data = process_data("example data")
+    print(data)
+    strings = ["hello", "world"]
+    concatenated = concatenate_strings(strings)
+    display_message(concatenated)
 
-
-def example_function(value: int) -> None:
-    process_data(value)
-    print_message("Data processed")
+if __name__ == "__main__":
+    main()
